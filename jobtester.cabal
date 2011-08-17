@@ -7,13 +7,13 @@ License-file:	LICENSE
 Author:		Ian-Woo Kim
 Maintainer: 	Ian-Woo Kim <ianwookim@gmail.com>
 Build-Type: 	Simple
-Cabal-Version:  >= 1.2
+Cabal-Version:  >= 1.8
 
 
 Executable jobtester
   Main-is: jobtester.hs
   hs-source-dirs: exe
-  Build-Depends: base>4
+  Build-Depends: base>4, jobtester, cmdargs>=0.7
   ghc-options: 	-Wall -O2 -threaded -funbox-strict-fields -fno-warn-unused-do-bind
   ghc-prof-options: -caf-all -auto-all
 
@@ -21,10 +21,12 @@ Library
   hs-source-dirs: lib
   ghc-options: 	-Wall -O2 -threaded -funbox-strict-fields -fno-warn-unused-do-bind
   ghc-prof-options: -caf-all -auto-all
-  Build-Depends: base>4
+  Build-Depends: base>4, cmdargs>=0.7, jobqueue-common >= 0.1.1, pipeline >= 0.3.7,
+                 filepath, webdav-manager >= 0.0.3, ghc, ghc-paths
   Exposed-Modules: 
                    HEP.Automation.JobQueue.Tester.Type 
                    HEP.Automation.JobQueue.Tester.Command                 
                    HEP.Automation.JobQueue.Tester.Job
+                   HEP.Automation.JobQueue.Tester.Plugins
 
 		 
