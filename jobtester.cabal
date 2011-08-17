@@ -22,11 +22,11 @@ Library
   ghc-options: 	-Wall -O2 -threaded -funbox-strict-fields -fno-warn-unused-do-bind
   ghc-prof-options: -caf-all -auto-all
   Build-Depends: base>4, cmdargs>=0.7, jobqueue-common >= 0.1.1, pipeline >= 0.3.7,
-                 filepath, webdav-manager >= 0.0.3, ghc, ghc-paths
+                 filepath, webdav-manager >= 0.0.3, ghc, HEPUtil>=0.1
   Exposed-Modules: 
                    HEP.Automation.JobQueue.Tester.Type 
                    HEP.Automation.JobQueue.Tester.Command                 
                    HEP.Automation.JobQueue.Tester.Job
-                   HEP.Automation.JobQueue.Tester.Plugins
+--                   HEP.Automation.JobQueue.Tester.Plugins
 
 		 
