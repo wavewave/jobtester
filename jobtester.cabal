@@ -1,0 +1,30 @@
+Name:		jobtester
+Version:	0.0
+Synopsis:	standalone job runner for testing
+Description:    standalone job runner for testing: for jobqueue-xxx 
+License: 	BSD3
+License-file:	LICENSE
+Author:		Ian-Woo Kim
+Maintainer: 	Ian-Woo Kim <ianwookim@gmail.com>
+Build-Type: 	Simple
+Cabal-Version:  >= 1.2
+
+
+Executable jobtester
+  Main-is: jobtester.hs
+  hs-source-dirs: exe
+  Build-Depends: base>4
+  ghc-options: 	-Wall -O2 -threaded -funbox-strict-fields -fno-warn-unused-do-bind
+  ghc-prof-options: -caf-all -auto-all
+
+Library
+  hs-source-dirs: lib
+  ghc-options: 	-Wall -O2 -threaded -funbox-strict-fields -fno-warn-unused-do-bind
+  ghc-prof-options: -caf-all -auto-all
+  Build-Depends: base>4
+  Exposed-Modules: 
+                   HEP.Automation.JobQueue.Tester.Type 
+                   HEP.Automation.JobQueue.Tester.Command                 
+                   HEP.Automation.JobQueue.Tester.Job
+
+		 
