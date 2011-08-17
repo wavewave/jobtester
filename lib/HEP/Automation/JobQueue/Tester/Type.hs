@@ -5,6 +5,7 @@ module HEP.Automation.JobQueue.Tester.Type where
 import System.Console.CmdArgs
 
 data JobTester = Test { config :: FilePath 
+                      , testconfig :: FilePath
                       , moduleName :: String 
                       , whatjob :: String }
                deriving (Show,Data,Typeable) 

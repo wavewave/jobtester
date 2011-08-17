@@ -9,8 +9,8 @@ import HEP.Automation.JobQueue.Config
 
 
 commandLineProcess :: JobTester -> IO () 
-commandLineProcess (Test conf mname job) = do 
+commandLineProcess (Test conf tconf mname job) = do 
   putStrLn "test called"
   lc <- readConfigFile conf 
-  let datasetdir = datasetDir . lc_clientConfiguration $ lc
-  jobTest datasetdir mname job
+  tc <- readTestConfigFile conf
+  startJob lc tc mname job
