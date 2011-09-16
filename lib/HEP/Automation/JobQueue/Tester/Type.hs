@@ -11,6 +11,7 @@ data JobTester = Test { config :: FilePath
                deriving (Show,Data,Typeable) 
 test :: JobTester 
 test = Test { config = "test.conf" 
+            , testconfig = "testtest.conf"
             , moduleName = "" &= typ "MODULENAME" &= argPos 0
             , whatjob = "" &= typ "JOBTYPE" &= argPos 1
             }

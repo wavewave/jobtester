@@ -1,5 +1,5 @@
 Name:		jobtester
-Version:	0.0
+Version:	0.0.0.999
 Synopsis:	standalone job runner for testing
 Description:    standalone job runner for testing: for jobqueue-xxx 
 License: 	BSD3

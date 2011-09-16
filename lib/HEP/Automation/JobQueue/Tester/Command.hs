@@ -12,5 +12,5 @@ commandLineProcess :: JobTester -> IO ()
 commandLineProcess (Test conf tconf mname job) = do 
   putStrLn "test called"
   lc <- readConfigFile conf 
-  tc <- readTestConfigFile conf
-  startJob lc tc mname job
+  tc <- readTestConfigFile tconf
+  startJob lc tc mname job 

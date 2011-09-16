@@ -27,16 +27,25 @@ startJob lc tc mname job = do
 getJobInfos :: String-> String -> String -> IO [JobInfo]
 getJobInfos datasetdir mname job = do 
   let fullmname = "HEP.Automation.MadGraph.Dataset." ++ mname
-  value <- pluginCompile datasetdir fullmname "(eventsets,webdavdir)" 
-  let (eventsets,webdavdir) = unsafeCoerce value :: ([EventSet],WebDAVRemoteDir)
-  jobdetails <- case job of
-                  "atlas_lhco"  -> return $ map (flip (MathAnal "atlas_lhco") webdavdir) eventsets
-                  "tev_reco"    -> return $ map (flip (MathAnal "tev_reco") webdavdir) eventsets
-                  "tev_top_afb" -> return $ map (flip (MathAnal "tev_top_afb") webdavdir) eventsets
-                  "tevpythia"   -> return $ map (flip (MathAnal "tevpythia") webdavdir) eventsets
-                  "eventgen"    -> return $ map (flip EventGen webdavdir) eventsets
-                  _ -> error "atlas_lhco tev_reco tev_top_afb tevpythia eventgen"
-  return $ map (\x -> JobInfo { jobinfo_id = 0, jobinfo_detail = x, jobinfo_status = Unassigned, jobinfo_priority = NonUrgent} ) jobdetails 
+  --  pluginCompile datasetdir "HEP.Automation.MadGraph.Dataset.Processes" "()"
+
+  r <- pluginCompile datasetdir fullmname "(eventsets,webdavdir)" 
+  case r of 
+    Left str -> error str 
+    Right value -> do 
+      let (eventsets,webdavdir) = unsafeCoerce value :: ([EventSet],WebDAVRemoteDir)
+          jobdetails = case job of
+            "atlas_lhco"  -> map (flip (MathAnal "atlas_lhco") webdavdir) eventsets
+            "tev_reco"    -> map (flip (MathAnal "tev_reco") webdavdir) eventsets
+            "tev_top_afb" -> map (flip (MathAnal "tev_top_afb") webdavdir) eventsets
+            "tevpythia"   -> map (flip (MathAnal "tevpythia") webdavdir) eventsets
+            "eventgen"    -> map (flip EventGen webdavdir) eventsets
+            _ -> error "atlas_lhco tev_reco tev_top_afb tevpythia eventgen"
+      return $ map (\x -> JobInfo { jobinfo_id = 0
+                                  , jobinfo_detail = x
+                                  , jobinfo_status = Unassigned
+                                  , jobinfo_priority = NonUrgent} ) 
+                   jobdetails 
  
 --   putStrLn "test ended "
 {-  putStrLn $ "sending " ++ show (length eventsets) ++ " jobs"
